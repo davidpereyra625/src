@@ -1,0 +1,181 @@
+<%- include('partials/header') -%>
+
+<header class="d-flex justify-content-center">
+  <h1>Ingresos</h1>
+</header>
+<main class="d-flex flex-column">
+  <button type="button" class="btn btn-primary" id="btn-new">
+    Nuevo Ingreso
+  </button>
+  <button type="button" class="btn btn-warning" id="btn-material">
+    Nuevo material
+  </button>
+  <br />
+  <div class="container text-center">
+    <div class="row" id="container-row">
+      <div class="table-responsive">
+        <table class="table" id="example" style="width: 100%">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha de Ingreso</th>
+              <th scope="col">Movil</th>
+              <th scope="col">Material</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% ingresos.forEach(ingreso => { %>
+            <tr>
+              <th scope="row"><%= ingreso.id %></th>
+              <td><%= ingreso.fecha_ingreso.toISOString().split('T')[0] %></td>
+              <td><%= ingreso.movil %></td>
+              <!-- <td><%= ingreso.id_materiales %></td> -->
+              <td><%= getMaterialName(ingreso.id_materiales) %></td>
+              <!-- Llamada a la función para obtener el nombre -->
+              <td><%= ingreso.cantidad_ingreso %></td>
+
+              <td>
+                <div>
+                  <button class="btn btn-warning btn-edit">Editar</button>
+                  <button class="btn btn-danger btn-delete">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal Ingresos-->
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">INGRESOS</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formulario">
+            <div class="mb-3">
+              <label for="inputMovil" class="col-form-label">Movil:</label>
+              <input type="text" class="form-control" id="inputMovil" />
+            </div>
+            <div class="mb-3">
+              <label for="inputMateriales" class="col-form-label"
+                >Materiales:</label
+              >
+              <select class="form-select" id="inputMateriales" name="material">
+                <% materiales.forEach(material => { %>
+                <option value="<%= material.id %>">
+                  <%= material.nombre_materiales %>
+                </option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputCantidad" class="col-form-label"
+                >Cantidad:</label
+              >
+              <input type="number" class="form-control" id="inputCantidad" />
+            </div>
+            <div class="mb-3">
+              <label for="fechas_ingresos" class="col-form-label"
+                >Fecha de Ingreso:</label
+              >
+              <input type="date" class="form-control" id="fechas_ingresos" />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="btn-save"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal Materiales-->
+  <div
+    class="modal fade"
+    id="myModalMateriales"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabelMateriales"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabelMateriales">
+            MATERIALES
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formularioMateriales">
+            <div class="mb-3">
+              <label for="codMateriales" class="col-form-label"
+                >Cod Material:</label
+              >
+              <input type="text" class="form-control" id="codMateriales" />
+            </div>
+            <div class="mb-3">
+              <label for="inputMateriales1" class="col-form-label"
+                >Materiales:</label
+              >
+              <input type="text" class="form-control" id="inputMateriales1" />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="btn-save-Materiales"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("partials/footer") -%> <% function getMaterialName(materialId) { for
+(let i = 0; i < materiales.length; i++) { if (materiales[i].id === materialId) {
+return materiales[i].nombre_materiales; } } return "Material no encontrado"; }
+%>

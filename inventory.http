@@ -1,0 +1,29 @@
+### traer inventario
+GET http://localhost:3000/api/inventario
+
+### crear inventario
+POST http://localhost:3000/api/inventario
+Content-Type: application/json
+
+{
+    "id_materiales":"001",
+    "movil":"josua",
+    "fecha_ingreso":"10/10/2023",
+    "cantidad_ingreso":"200"
+
+}
+
+### MODIFICAR TAREA
+PUT http://localhost:3000/api/inventario/7
+Content-Type: application/json
+
+{
+    "id_materiales": "001",
+    "fecha_ingreso":"2023-10-10 03:00:00",
+    "movil":"el mas 1",
+    "cantidad_ingreso":"222"
+}
+
+### ELIMINAR
+DELETE http://localhost:3000/api/inventario/2
+

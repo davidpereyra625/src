@@ -1,0 +1,23 @@
+/* Estilizar los botones */
+.btn-primary {
+    background-color: #007bff; /* Color de fondo del botón Nuevo Ingreso */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espacio interno */
+  }
+  
+  .btn-warning {
+    background-color: #ffc107; /* Color de fondo del botón Nuevo Material */
+    color: #000; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espacio interno */
+  }
+  
+  /* Alinear los botones uno al lado del otro */
+  #btn-new, #btn-material {
+    display: inline-block; /* Colocar en línea uno al lado del otro */
+    margin-right: 20px; /* Espacio entre los botones */
+  }
+  

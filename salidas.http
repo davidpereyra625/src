@@ -1,0 +1,29 @@
+### traer inventario
+GET http://localhost:3000/api/salidas
+
+### crear inventario
+POST http://localhost:3000/api/salidas
+Content-Type: application/json
+
+{
+    "id_materiales":"003",
+    "id_provincias":"1",
+    "movil":"el deivid",
+    "fecha_salida":"2023-09-25",
+    "cantidad_salida":"50"
+}
+
+### MODIFICAR TAREA
+PUT http://localhost:3000/api/salidas/1
+Content-Type: application/json
+
+{
+    "id_materiales":"001",
+    "id_provincias":"1",
+    "movil":"josua",
+    "fecha_salida":"2023-09-25",
+    "cantidad_salida":"50"
+}
+
+### ELIMINAR
+DELETE http://localhost:3000/api/salidas/2

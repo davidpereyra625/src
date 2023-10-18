@@ -1,0 +1,183 @@
+<%- include('partials/header') -%>
+
+<header class="d-flex justify-content-center">
+  <h1>Salidas</h1>
+</header>
+<main class="d-flex flex-column">
+  <!-- Botón para abrir el modal de inserción de salidas -->
+  <button type="button" class="btn btn-primary" id="btn-new-salida">
+    Nueva Salida
+  </button>
+  <br />
+
+  <!-- Agrega un botón o enlace para abrir el modal de inserción de salidas -->
+
+  <div class="container text-center">
+    <div class="row" id="container-row">
+      <div class="table-responsive">
+        <table class="table" id="example" style="width: 100%">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha de Salida</th>
+              <th scope="col">Movil</th>
+              <th scope="col">Material</th>
+              <th scope="col">Provincia</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% salidas.forEach(salida => { %>
+            <tr>
+              <th scope="row"><%= salida.id %></th>
+              <td><%= salida.fecha_salida.toISOString().split('T')[0] %></td>
+              <td><%= salida.movil %></td>
+              <td><%= getMaterialName(salida.id_materiales) %></td>
+              <td>
+                <% function getProvinciaName(provinciaId) { %> <% const
+                provinciaName = provincias.find(provincia => provincia.id ===
+                provinciaId)?.descripcion_provincia; %> <% return provinciaName
+                || "Provincia no encontrada"; %> <% } %>
+              </td>
+              <td><%= salida.cantidad_salida %></td>
+
+              <td>
+                <div>
+                  <!-- Agrega botones para editar y eliminar salidas si es necesario -->
+                  <button class="btn btn-warning btn-edit-Salidas">
+                    Editar
+                  </button>
+                  <button class="btn btn-danger btn-delete-Salidas">
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agrega un modal para insertar nuevas salidas similar al de ingresos.ejs -->
+
+  <!-- Modal para insertar nuevas salidas -->
+  <div
+    class="modal fade"
+    id="myModalSalida"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabelSalida"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabelSalida">SALIDAS</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formularioSalida">
+            <div class="mb-3">
+              <label for="inputMovilSalida" class="col-form-label"
+                >Movil:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="inputMovilSalida"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="inputMaterialesSalida" class="col-form-label"
+                >Materiales:</label
+              >
+              <select
+                class="form-select"
+                id="inputMaterialesSalida"
+                name="material"
+                required
+              >
+                <!-- Aquí debes llenar el select con los materiales disponibles -->
+                <% materiales.forEach(material => { %>
+                <option value="<%= material.id %>">
+                  <%= material.nombre_materiales %>
+                </option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputProvinciasSalida" class="col-form-label"
+                >Provincias:</label
+              >
+              <select
+                class="form-select"
+                id="inputProvinciasSalida"
+                name="provincia"
+                required
+              >
+                <!-- Aquí debes llenar el select con las provincias disponibles -->
+                <% provincias.forEach(provincia => { %>
+                <option value="<%= provincia.id %>">
+                  <%= provincia.descripcion_provincia %>
+                </option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputCantidadSalida" class="col-form-label"
+                >Cantidad:</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="inputCantidadSalida"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="fechas_salida" class="col-form-label"
+                >Fecha de Salida:</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="fechas_salida"
+                required
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="btn-save-salida"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("partials/footer") -%> <% function getMaterialName(materialId) { for
+(let i = 0; i < materiales.length; i++) { if (materiales[i].id === materialId) {
+return materiales[i].nombre_materiales; } } return "Material no encontrado"; }
+%> <% function getProvinciaName(provinciaId) { %> <% for (let i = 0; i <
+provincias.length; i++) { %> <% if (provincias[i].id === provinciaId) { %> <%
+const provinciaName = provincias[i].descripcion_provincia; %> <% } %> <% } %> <%
+return provinciaName; %> <% } %>

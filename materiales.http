@@ -1,0 +1,27 @@
+### traer inventario
+
+GET http://localhost:3000/api/materiales
+
+### crear inventario
+POST http://localhost:3000/api/materiales
+Content-Type: application/json
+
+{
+    "codigo_materiales":"003",
+    "nombre_materiales":"Antenas"
+    
+
+}
+
+### MODIFICAR TAREA
+PUT http://localhost:3000/api/materiales/2
+Content-Type: application/json
+
+{
+    "codigo_materiales": "002",
+    
+    "nombre_materiales":"Cables"
+}
+
+### ELIMINAR
+DELETE http://localhost:3000/api/materiales/2
