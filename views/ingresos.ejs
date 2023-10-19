@@ -76,14 +76,12 @@
               <input type="text" class="form-control" id="inputMovil" />
             </div>
             <div class="mb-3">
-              <label for="inputMateriales" class="col-form-label"
-                >Materiales:</label
-              >
+              <label for="inputMateriales" class="col-form-label">Materiales:</label>
               <select class="form-select" id="inputMateriales" name="material">
                 <% materiales.forEach(material => { %>
-                <option value="<%= material.id %>">
-                  <%= material.nombre_materiales %>
-                </option>
+                  <option value="<%= material.id %>" <%= (material.id === materialSeleccionado) ? 'selected' : '' %>>
+                    <%= material.nombre_materiales %>
+                  </option>
                 <% }) %>
               </select>
             </div>

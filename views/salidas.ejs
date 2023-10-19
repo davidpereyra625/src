@@ -34,12 +34,7 @@
               <td><%= salida.fecha_salida.toISOString().split('T')[0] %></td>
               <td><%= salida.movil %></td>
               <td><%= getMaterialName(salida.id_materiales) %></td>
-              <td>
-                <% function getProvinciaName(provinciaId) { %> <% const
-                provinciaName = provincias.find(provincia => provincia.id ===
-                provinciaId)?.descripcion_provincia; %> <% return provinciaName
-                || "Provincia no encontrada"; %> <% } %>
-              </td>
+              <td><%= getProvinciaName(salida.id_provincias) %></td>
               <td><%= salida.cantidad_salida %></td>
 
               <td>
@@ -177,7 +172,7 @@
 <%- include("partials/footer") -%> <% function getMaterialName(materialId) { for
 (let i = 0; i < materiales.length; i++) { if (materiales[i].id === materialId) {
 return materiales[i].nombre_materiales; } } return "Material no encontrado"; }
-%> <% function getProvinciaName(provinciaId) { %> <% for (let i = 0; i <
-provincias.length; i++) { %> <% if (provincias[i].id === provinciaId) { %> <%
-const provinciaName = provincias[i].descripcion_provincia; %> <% } %> <% } %> <%
-return provinciaName; %> <% } %>
+%> <% function getProvinciaName(provinciaId) { %> <% const provincia =
+provincias.find(provincia => provincia.id === provinciaId); %> <% if (provincia)
+{ %> <%= provincia.descripcion_provincia %> <% } else { %> Provincia no
+encontrada <% } %> <% } %>

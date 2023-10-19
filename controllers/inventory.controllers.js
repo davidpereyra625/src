@@ -6,7 +6,12 @@ export const ctrlView = async (req, res) => {
   try {
     const ingresos = await IngresosModel.findAll();
     const materiales = await MaterialesModel.findAll();
-    res.render("ingresos.ejs", { ingresos, materiales });
+
+    // Definir materialSeleccionado aquí antes de renderizar la vista
+    const materialSeleccionado =
+      "Aquí coloca el valor del material seleccionado"; // Puedes obtener este valor de tu lógica de negocio
+
+    res.render("ingresos.ejs", { ingresos, materiales, materialSeleccionado });
   } catch (error) {
     console.error(error);
     return res.status(500).json({

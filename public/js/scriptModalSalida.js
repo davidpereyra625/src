@@ -70,7 +70,15 @@ document.addEventListener("click", (event) => {
     const fechaSalida = row.querySelector("td:nth-child(2)").textContent;
     const movil = row.querySelector("td:nth-child(3)").textContent;
     const material = row.querySelector("td:nth-child(4)").textContent;
-    const cantidad = row.querySelector("td:nth-child(5)").textContent;
+    const cantidad = row.querySelector("td:nth-child(6)").textContent;
+    const provincia = row.querySelector("td:nth-child(5)").textContent; // Obtén la provincia
+    console.log(row);
+
+    console.log(fechaSalida);
+    console.log(movil);
+    console.log(material);
+    console.log(cantidad);
+    console.log(provincia);
 
     // Llenar el formulario con los valores
     idForm1 = idSalida;
@@ -78,6 +86,13 @@ document.addEventListener("click", (event) => {
     inputMaterialesSalida.value = material; // Esto asume que `inputMaterialesSalida` es un campo de selección
     inputCantidadSalida.value = cantidad;
     fechas_salida.value = fechaSalida;
+
+    // Ahora, debes seleccionar la provincia correcta en el campo de selección
+    // Esto depende de cómo tienes tus opciones de provincia en tu formulario
+
+    // Supongamos que `provincia` contiene el valor de la provincia asociada a la salida
+    // y que el valor del campo de selección de provincias es el ID de la provincia
+    inputProvinciasSalida.value = provincia; // Asigna el valor de la provincia al campo de selección
 
     option1 = "editar";
     btnSaveSalida.textContent = "Editar";

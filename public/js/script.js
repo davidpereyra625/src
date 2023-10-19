@@ -76,7 +76,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
-//Evento para editar
+// Evento para editar
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("btn-edit")) {
     const row = event.target.closest("tr");
@@ -86,12 +86,18 @@ document.addEventListener("click", (event) => {
     const material = row.querySelector("td:nth-child(4)").textContent;
     const cantidad = row.querySelector("td:nth-child(5)").textContent;
 
+    // Guarda el valor del material que ya estaba seleccionado en esa fila
+    const materialSeleccionado = material;
+
+    // Llena el campo inputMateriales con el material guardado
+    inputMateriales.value = materialSeleccionado;
+
     // Llenar el formulario con los valores
     idForm = idArticle;
     inputMovil.value = movil;
-    inputMateriales.value = material; // Esto asume que `inputMateriales` es un campo de selección
     inputCantidad.value = cantidad;
     fecha_ingreso.value = fechaIngreso;
+
     option = "edit";
     btnSave.textContent = "Editar";
     myModal.show();
