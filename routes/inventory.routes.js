@@ -4,6 +4,7 @@ import {
   ctrlDeleteInventory,
   ctrlGetInventory,
   ctrlUpdateInventory,
+  ctrlViewIndex,
   ctrlView,
 } from "../controllers/inventory.controllers.js";
 import {
@@ -28,7 +29,9 @@ import { validator } from "../middlewares/validator.js";
 const inventoryRouter = Router();
 
 //Rutas para las vistas
-
+// Ruta para la página de inicio (index)
+// RUTA PARA LA PÁGINA DE INICIO
+inventoryRouter.get("/", ctrlViewIndex);
 inventoryRouter.get("/inventario", ctrlView);
 inventoryRouter.get("/salidas", ctrlViewSalidas);
 

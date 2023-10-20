@@ -1,6 +1,19 @@
 import { IngresosModel } from "../models/Ingresos.js";
 import { MaterialesModel } from "../models/Materiales.js";
 
+// Controlador para mostrar la página de inicio
+export const ctrlViewIndex = async (req, res) => {
+  try {
+    const materiales = await MaterialesModel.findAll();
+    res.render("index.ejs", { materiales }); // Renderiza la vista index.ejs y pasa las tareas como datos
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Error Server",
+    });
+  }
+};
+
 // controlador para mostrar la vista
 export const ctrlView = async (req, res) => {
   try {

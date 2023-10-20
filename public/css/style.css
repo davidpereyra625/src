@@ -1,23 +1,136 @@
-/* Estilizar los botones */
+/* Fondo principal */
+body {
+  background-color: #ffffff; /* Color de fondo principal */
+  color: #000; /* Color de texto principal */
+  font-family: Arial, sans-serif; /* Fuente legible */
+}
+
+/* Encabezado */
+header {
+  background-color: #ff6200; /* Color de fondo para el encabezado */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Títulos principales */
+.header h1 {
+  color: #ffffff; /* Color de texto para los títulos principales */
+}
+/* Estilos para los botones principales */
 .btn-primary {
-    background-color: #007bff; /* Color de fondo del botón Nuevo Ingreso */
-    color: #fff; /* Color del texto */
-    border: none; /* Elimina el borde */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espacio interno */
-  }
-  
-  .btn-warning {
-    background-color: #ffc107; /* Color de fondo del botón Nuevo Material */
-    color: #000; /* Color del texto */
-    border: none; /* Elimina el borde */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espacio interno */
-  }
-  
-  /* Alinear los botones uno al lado del otro */
-  #btn-new, #btn-material {
-    display: inline-block; /* Colocar en línea uno al lado del otro */
-    margin-right: 20px; /* Espacio entre los botones */
-  }
-  
+  background-color: #ff6200; /* Color de fondo del botón principal */
+  border: none;
+  color: #ffffff; /* Color de texto del botón principal */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Agrega un margen derecho entre los botones */
+  margin-top: 20px;
+}
+
+/* Botones secundarios */
+.btn-secondary {
+  background-color: #888888; /* Color de fondo del botón secundario */
+  border: none;
+  color: #ffffff; /* Color de texto del botón secundario */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 40px;
+}
+
+/* Encabezado de tabla */
+th {
+  background-color: #ff6200; /* Color de fondo del encabezado de la tabla */
+  color: #ffffff; /* Color de texto del encabezado de la tabla */
+  text-align: left;
+  padding: 10px;
+}
+
+/* Filas pares de la tabla */
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo de las filas pares */
+}
+
+/* Celdas de la tabla */
+td {
+  padding: 10px;
+}
+
+/* Formularios */
+form {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f2f2f2; /* Color de fondo del formulario */
+  border-radius: 5px;
+}
+
+/* Etiquetas de formulario */
+label {
+  font-weight: bold;
+}
+
+/* Campos de entrada de formulario */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #888888;
+  border-radius: 5px;
+}
+
+/* Botones de formulario */
+.btn-form {
+  background-color: #ff6200;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Modales */
+.modal-content {
+  background-color: #ffffff; /* Color de fondo del contenido del modal */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Mensajes de error */
+.error-message {
+  color: #ff0000; /* Color de texto para mensajes de error */
+  font-size: 14px;
+}
+/* Estilos para el contenedor de la animación */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Asegura que esté detrás de otros elementos */
+}
+
+/* Estilos para el encabezado */
+.header-content {
+  background-color: #ff6200; /* Color de fondo para el encabezado */
+  text-align: center;
+  padding: 20px;
+  /* Otros estilos según sea necesario */
+}
+
+/* Títulos principales dentro del encabezado */
+.header-content h1 {
+  color: #ffffff; /* Color de texto para los títulos principales dentro del encabezado */
+}
+
+/* Estilos personalizados para otras partes de tu sitio web */
+
+/* Por favor, agrega más estilos según sea necesario para personalizar tu diseño */

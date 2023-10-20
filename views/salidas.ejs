@@ -1,21 +1,22 @@
 <%- include('partials/header') -%>
+<!-- Agrega el contenedor para la animación aquí, fuera del <main> -->
+<div id="particles-js"></div>
 
-<header class="d-flex justify-content-center">
+<header class="header d-flex justify-content-center">
   <h1>Salidas</h1>
 </header>
-<main class="d-flex flex-column">
-  <!-- Botón para abrir el modal de inserción de salidas -->
+
+<main class="main-content">
   <button type="button" class="btn btn-primary" id="btn-new-salida">
     Nueva Salida
   </button>
+  <!-- Agregar clases CSS según sea necesario -->
   <br />
 
-  <!-- Agrega un botón o enlace para abrir el modal de inserción de salidas -->
-
-  <div class="container text-center">
+  <div class="container">
     <div class="row" id="container-row">
       <div class="table-responsive">
-        <table class="table" id="example" style="width: 100%">
+        <table class="table" id="example">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -36,10 +37,8 @@
               <td><%= getMaterialName(salida.id_materiales) %></td>
               <td><%= getProvinciaName(salida.id_provincias) %></td>
               <td><%= salida.cantidad_salida %></td>
-
               <td>
                 <div>
-                  <!-- Agrega botones para editar y eliminar salidas si es necesario -->
                   <button class="btn btn-warning btn-edit-Salidas">
                     Editar
                   </button>

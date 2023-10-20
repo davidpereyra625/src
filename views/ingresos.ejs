@@ -1,20 +1,24 @@
 <%- include('partials/header') -%>
+<!-- Agrega el contenedor para la animación aquí, fuera del <main> -->
+  <div id="particles-js"></div>
 
-<header class="d-flex justify-content-center">
-  <h1>Ingresos</h1>
+<header class="header">
+  <h1 class="main-title">Ingresos</h1>
 </header>
-<main class="d-flex flex-column">
+<main class="main-content">
   <button type="button" class="btn btn-primary" id="btn-new">
     Nuevo Ingreso
   </button>
-  <button type="button" class="btn btn-warning" id="btn-material">
+  <button type="button" class="btn btn-secondary" id="btn-material">
     Nuevo material
   </button>
+  <!-- Agregar clases CSS según sea necesario -->
   <br />
-  <div class="container text-center">
+
+  <div class="container">
     <div class="row" id="container-row">
       <div class="table-responsive">
-        <table class="table" id="example" style="width: 100%">
+        <table class="table" id="example">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -31,11 +35,8 @@
               <th scope="row"><%= ingreso.id %></th>
               <td><%= ingreso.fecha_ingreso.toISOString().split('T')[0] %></td>
               <td><%= ingreso.movil %></td>
-              <!-- <td><%= ingreso.id_materiales %></td> -->
               <td><%= getMaterialName(ingreso.id_materiales) %></td>
-              <!-- Llamada a la función para obtener el nombre -->
               <td><%= ingreso.cantidad_ingreso %></td>
-
               <td>
                 <div>
                   <button class="btn btn-warning btn-edit">Editar</button>
