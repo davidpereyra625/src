@@ -5,20 +5,20 @@
 <header class="header">
   <h1 class="main-title">Ingresos</h1>
 </header>
-<main class="main-content">
+<main class="container">
+  <div class="my-3">
   <button type="button" class="btn btn-primary" id="btn-new">
     Nuevo Ingreso
   </button>
   <button type="button" class="btn btn-secondary" id="btn-material">
     Nuevo material
   </button>
-  <!-- Agregar clases CSS según sea necesario -->
-  <br />
+</div>
 
-  <div class="container">
-    <div class="row" id="container-row">
-      <div class="table-responsive">
-        <table class="table" id="example">
+  
+    
+      
+        <table class="table display" id="example" style="width:100%">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -47,9 +47,8 @@
             <% }) %>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
+  
+  
 
   <!-- modal Ingresos-->
   <div
@@ -74,11 +73,11 @@
           <form id="formulario">
             <div class="mb-3">
               <label for="inputMovil" class="col-form-label">Movil:</label>
-              <input type="text" class="form-control" id="inputMovil" />
+              <input type="text" class="form-control" id="inputMovil" required/>
             </div>
             <div class="mb-3">
               <label for="inputMateriales" class="col-form-label">Materiales:</label>
-              <select class="form-select" id="inputMateriales" name="material">
+              <select class="form-select" id="inputMateriales" name="material" required>
                 <% materiales.forEach(material => { %>
                   <option value="<%= material.id %>" <%= (material.id === materialSeleccionado) ? 'selected' : '' %>>
                     <%= material.nombre_materiales %>
@@ -90,13 +89,13 @@
               <label for="inputCantidad" class="col-form-label"
                 >Cantidad:</label
               >
-              <input type="number" class="form-control" id="inputCantidad" />
+              <input type="number" class="form-control" id="inputCantidad" required />
             </div>
             <div class="mb-3">
               <label for="fechas_ingresos" class="col-form-label"
                 >Fecha de Ingreso:</label
               >
-              <input type="date" class="form-control" id="fechas_ingresos" />
+              <input type="date" class="form-control" id="fechas_ingresos" required />
             </div>
             <div class="modal-footer">
               <button

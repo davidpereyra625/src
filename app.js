@@ -21,9 +21,9 @@ app.set("view engine", "ejs");
 
 const port = 3000;
 
-// app.get("/", (req, res) => {
-//   res.send("todo listo");
-// });
+app.get("/index.ejs", (req, res) => {
+  res.send("todo listo");
+});
 
 app.use("/", inventoryRouter);
 

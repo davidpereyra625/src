@@ -29,7 +29,7 @@ btnCrearSalida.addEventListener("click", () => {
 });
 
 // Evento para eliminar
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
   if (event.target.classList.contains("btn-delete-Salidas")) {
     const row = event.target.closest("tr");
     const idSalida = row.querySelector("th").textContent; // ID de la salida
@@ -42,21 +42,23 @@ document.addEventListener("click", (event) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "¡Sí, eliminar!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/salidas/${idSalida}`, {
-          method: "DELETE",
-        })
-          .then((res) => {
-            if (res.ok) {
-              row.remove(); // Elimina la fila de la tabla
+        try {
+          const res = await fetch(
+            `http://localhost:3000/api/salidas/${idSalida}`,
+            {
+              method: "DELETE",
             }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+          );
 
-        Swal.fire("¡Eliminado!", "La salida ha sido eliminada.", "success");
+          if (res.ok) {
+            row.remove(); // Elimina la fila de la tabla
+            Swal.fire("¡Eliminado!", "La salida ha sido eliminada.", "success");
+          }
+        } catch (err) {
+          console.error(err);
+        }
       }
     });
   }
@@ -71,28 +73,15 @@ document.addEventListener("click", (event) => {
     const movil = row.querySelector("td:nth-child(3)").textContent;
     const material = row.querySelector("td:nth-child(4)").textContent;
     const cantidad = row.querySelector("td:nth-child(6)").textContent;
-    const provincia = row.querySelector("td:nth-child(5)").textContent; // Obtén la provincia
-    console.log(row);
+    const provincia = row.querySelector("td:nth-child(5)").textContent;
 
-    console.log(fechaSalida);
-    console.log(movil);
-    console.log(material);
-    console.log(cantidad);
-    console.log(provincia);
-
-    // Llenar el formulario con los valores
     idForm1 = idSalida;
     inputMovilSalida.value = movil;
-    inputMaterialesSalida.value = material; // Esto asume que `inputMaterialesSalida` es un campo de selección
+    inputMaterialesSalida.value = material;
     inputCantidadSalida.value = cantidad;
     fechas_salida.value = fechaSalida;
 
-    // Ahora, debes seleccionar la provincia correcta en el campo de selección
-    // Esto depende de cómo tienes tus opciones de provincia en tu formulario
-
-    // Supongamos que `provincia` contiene el valor de la provincia asociada a la salida
-    // y que el valor del campo de selección de provincias es el ID de la provincia
-    inputProvinciasSalida.value = provincia; // Asigna el valor de la provincia al campo de selección
+    inputProvinciasSalida.value = provincia;
 
     option1 = "editar";
     btnSaveSalida.textContent = "Editar";
@@ -101,70 +90,92 @@ document.addEventListener("click", (event) => {
   }
 });
 
-formularioSalida.addEventListener("submit", (event) => {
+formularioSalida.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  if (option1 === "nuevo") {
-    const nuevaSalida = {
-      movil: inputMovilSalida.value,
-      id_materiales: inputMaterialesSalida.value,
-      id_provincias: inputProvinciasSalida.value,
-      cantidad_salida: inputCantidadSalida.value,
-      fecha_salida: fechas_salida.value,
-    };
+  // Obtiene los valores del formulario
+  const materialId = document.getElementById("inputMaterialesSalida").value;
+  const cantidadSalida = parseInt(
+    document.getElementById("inputCantidadSalida").value
+  );
 
-    fetch("http://localhost:3000/api/salidas", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(nuevaSalida),
-    })
-      .then((res) => {
+  // Realiza una solicitud GET para obtener la cantidad disponible
+  const response = await fetch(`/api/cantidadDisponible/${materialId}`);
+  const data = await response.json();
+  const cantidadDisponible = data.cantidadDisponible;
+
+  // Compara la cantidad ingresada con la disponible
+  if (cantidadSalida > cantidadDisponible) {
+    alert("No hay suficiente stock para la cantidad ingresada.");
+  } else {
+    btnSaveSalida.textContent = "Guardando..."; // Cambia el texto del botón mientras se guarda
+    btnSaveSalida.disabled = true; // Deshabilita el botón
+
+    // En este punto, puedes manejar los casos "nuevo" y "editar" por separado
+    if (option1 === "nuevo") {
+      // Continúa con la creación de la salida.
+      const nuevaSalida = {
+        movil: inputMovilSalida.value,
+        id_materiales: inputMaterialesSalida.value,
+        id_provincias: inputProvinciasSalida.value,
+        cantidad_salida: inputCantidadSalida.value,
+        fecha_salida: fechas_salida.value,
+      };
+
+      fetch("http://localhost:3000/api/salidas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevaSalida),
+      })
+        .then((res) => {
+          if (res.ok) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "La salida ha sido guardada",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            myModalSalida.hide();
+            location.reload();
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+    if (option1 === "editar") {
+      // Continúa con la edición de la salida.
+      const salidaEditada = {
+        movil: inputMovilSalida.value,
+        id_materiales: inputMaterialesSalida.value,
+        id_provincias: inputProvinciasSalida.value,
+        cantidad_salida: inputCantidadSalida.value,
+        fecha_salida: fechas_salida.value,
+      };
+
+      fetch(`http://localhost:3000/api/salidas/${idForm1}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(salidaEditada),
+      }).then((res) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "La salida ha sido editada",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         if (res.ok) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "La salida ha sido guardada",
-            showConfirmButton: false,
-            timer: 2000,
-          });
           myModalSalida.hide();
           location.reload();
         }
-      })
-      .catch((err) => {
-        console.error(err);
       });
-  }
-
-  if (option1 === "editar") {
-    const salidaEditada = {
-      movil: inputMovilSalida.value,
-      id_materiales: inputMaterialesSalida.value,
-      id_provincias: inputProvinciasSalida.value,
-      cantidad_salida: inputCantidadSalida.value,
-      fecha_salida: fechas_salida.value,
-    };
-
-    fetch(`http://localhost:3000/api/salidas/${idForm1}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(salidaEditada),
-    }).then((res) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "La salida ha sido editada",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      if (res.ok) {
-        myModalSalida.hide();
-        location.reload();
-      }
-    });
+    }
   }
 });

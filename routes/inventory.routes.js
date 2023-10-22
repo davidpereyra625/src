@@ -6,6 +6,7 @@ import {
   ctrlUpdateInventory,
   ctrlViewIndex,
   ctrlView,
+  // ctrlGetStock,
 } from "../controllers/inventory.controllers.js";
 import {
   ctrlCreateMateriales,
@@ -19,6 +20,7 @@ import {
   ctrlDeleteSalidas,
   ctrlGetSalidas,
   ctrlUpdateSalidas,
+  getCantidadDisponible,
 } from "../controllers/salidas.controllers.js";
 import {
   createMaterialesSchema,
@@ -54,5 +56,12 @@ inventoryRouter.put("/api/salidas/:id", ctrlUpdateSalidas);
 inventoryRouter.delete("/api/inventario/:id", ctrlDeleteInventory);
 inventoryRouter.delete("/api/materiales/:id", ctrlDeleteMateriales);
 inventoryRouter.delete("/api/salidas/:id", ctrlDeleteSalidas);
+
+// Define una ruta para obtener la cantidad disponible
+inventoryRouter.get("/api/cantidadDisponible/:materialId", async (req, res) => {
+  const materialId = req.params.materialId;
+  const cantidadDisponible = await getCantidadDisponible(materialId);
+  res.json({ cantidadDisponible });
+});
 
 export { inventoryRouter };

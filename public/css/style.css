@@ -1,74 +1,61 @@
 /* Fondo principal */
 body {
-  background-color: #ffffff; /* Color de fondo principal */
-  color: #000; /* Color de texto principal */
-  font-family: Arial, sans-serif; /* Fuente legible */
+  background-color: #ffffff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 16px; /* Tamaño de fuente base */
 }
 
 /* Encabezado */
 header {
-  background-color: #ff6200; /* Color de fondo para el encabezado */
+  background-color: #ff6200;
   text-align: center;
-  padding: 20px;
+  padding: 10px; /* Reducción del espaciado en dispositivos móviles */
 }
 
 /* Títulos principales */
 .header h1 {
-  color: #ffffff; /* Color de texto para los títulos principales */
+  color: #ffffff;
 }
+
 /* Estilos para los botones principales */
-.btn-primary {
-  background-color: #ff6200; /* Color de fondo del botón principal */
+.btn-primary,
+.btn-secondary,
+.btn-form {
+  background-color: #ff6200;
   border: none;
-  color: #ffffff; /* Color de texto del botón principal */
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px; /* Agrega un margen derecho entre los botones */
-  margin-top: 20px;
+  width: auto; /* Ancho automático para los botones */
+  margin-bottom: 10px; /* Agrega un margen inferior para separar botones */
 }
 
-/* Botones secundarios */
-.btn-secondary {
-  background-color: #888888; /* Color de fondo del botón secundario */
-  border: none;
-  color: #ffffff; /* Color de texto del botón secundario */
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
+
+/* Estilo de celdas en hover */
+tr:hover {
+  background-color: #ff6200;
+  color: #ffffff;
 }
 
-/* Tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 40px;
+/* Estilos para la tabla más pequeña */
+.small-table {
+  width: 70%;
+  margin: 0 auto;
 }
 
-/* Encabezado de tabla */
-th {
-  background-color: #ff6200; /* Color de fondo del encabezado de la tabla */
-  color: #ffffff; /* Color de texto del encabezado de la tabla */
-  text-align: left;
-  padding: 10px;
-}
-
-/* Filas pares de la tabla */
-tr:nth-child(even) {
-  background-color: #f2f2f2; /* Color de fondo de las filas pares */
-}
-
-/* Celdas de la tabla */
-td {
-  padding: 10px;
+/* Alineación de texto en las celdas */
+.small-table td {
+  text-align: center;
+  padding: 5px; /* Reducción del espaciado en celdas de tabla */
 }
 
 /* Formularios */
 form {
   margin: 20px;
   padding: 20px;
-  background-color: #f2f2f2; /* Color de fondo del formulario */
+  background-color: #f2f2f2;
   border-radius: 5px;
 }
 
@@ -86,28 +73,19 @@ label {
   border-radius: 5px;
 }
 
-/* Botones de formulario */
-.btn-form {
-  background-color: #ff6200;
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 /* Modales */
 .modal-content {
-  background-color: #ffffff; /* Color de fondo del contenido del modal */
+  background-color: #ffffff;
   border-radius: 10px;
   padding: 20px;
 }
 
 /* Mensajes de error */
 .error-message {
-  color: #ff0000; /* Color de texto para mensajes de error */
+  color: #ff0000;
   font-size: 14px;
 }
+
 /* Estilos para el contenedor de la animación */
 #particles-js {
   position: fixed;
@@ -115,22 +93,39 @@ label {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Asegura que esté detrás de otros elementos */
+  z-index: -1;
 }
 
 /* Estilos para el encabezado */
 .header-content {
-  background-color: #ff6200; /* Color de fondo para el encabezado */
+  background-color: #ff6200;
   text-align: center;
-  padding: 20px;
-  /* Otros estilos según sea necesario */
+  padding: 10px; /* Reducción del espaciado en dispositivos móviles */
 }
 
 /* Títulos principales dentro del encabezado */
 .header-content h1 {
-  color: #ffffff; /* Color de texto para los títulos principales dentro del encabezado */
+  color: #ffffff;
 }
 
 /* Estilos personalizados para otras partes de tu sitio web */
 
 /* Por favor, agrega más estilos según sea necesario para personalizar tu diseño */
+
+/* Estilos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+@media (max-width: 768px) {
+  /* Redefine el espaciado en el encabezado y el contenido de los botones */
+  header {
+    padding: 10px;
+  }
+
+  /* Asegura que los botones se ajusten al ancho de la pantalla */
+  .btn-primary,
+  .btn-secondary,
+  .btn-form {
+    width: 100%;
+    margin-top: 10px; /* Añade margen superior para separar botones */
+  }
+
+  
+}

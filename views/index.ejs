@@ -3,29 +3,29 @@
 <div id="particles-js"></div>
 
 <header class="header">
-  <h1 class="main-title">Stock General</h1>
+  <h1 class="main-title">Stock Actual</h1>
 </header>
 <main class="main-content">
   <!-- Contenido principal -->
-
-  <!-- Agrega la tabla aquí -->
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Material</th>
-        <th>Cantidad</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Aquí debes iterar sobre los materiales y mostrarlos en filas de la tabla -->
-      <% materiales.forEach(material => { %>
-      <tr>
-        <td><%= material.nombre_materiales %></td>
-        <td><%= material.cantidad %></td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <!-- Tabla de Stock más pequeña y centrada -->
+    <table class="table small-table">
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Stock Actual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% stock.forEach(item => { %>
+        <tr>
+          <td><%= item.material %></td>
+          <td><%= item.stock %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 </main>
 
-<%- include("partials/footer") -%>
+<%- include('partials/footer') -%>

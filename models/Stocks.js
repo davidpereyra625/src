@@ -10,7 +10,7 @@ export const StocksModel = sequelize.define(
       allowNull: true,
     },
     cantidad_stock: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
   },

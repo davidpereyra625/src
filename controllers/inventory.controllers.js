@@ -1,15 +1,40 @@
 import { IngresosModel } from "../models/Ingresos.js";
+import { SalidasModel } from "../models/Salidas.js";
 import { MaterialesModel } from "../models/Materiales.js";
+import { StocksModel } from "../models/Stocks.js";
+import { InventarioTransaccionesModel } from "../models/InventarioTransacciones.js";
 
 // Controlador para mostrar la página de inicio
 export const ctrlViewIndex = async (req, res) => {
   try {
+    // Mover la lógica de cálculo de stock aquí
     const materiales = await MaterialesModel.findAll();
-    res.render("index.ejs", { materiales }); // Renderiza la vista index.ejs y pasa las tareas como datos
+
+    // Calcular el stock actual para cada material
+    const stock = await Promise.all(
+      materiales.map(async (material) => {
+        const ingresos = await IngresosModel.sum("cantidad_ingreso", {
+          where: { id_materiales: material.id },
+        });
+
+        const salidas = await SalidasModel.sum("cantidad_salida", {
+          where: { id_materiales: material.id },
+        });
+        const stockActual = ingresos - salidas;
+        return {
+          material: material.nombre_materiales,
+          stock: stockActual,
+        };
+      })
+    );
+
+    // Renderizar la vista index.ejs con los datos de stock
+    res.render("index.ejs", { stock });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
-      message: "Error Server",
+      message: "Error en el servidor",
+      error: error.message,
     });
   }
 };
@@ -47,18 +72,52 @@ export const ctrlGetInventory = async (req, res) => {
   }
 };
 
-//controllador para crear todo el inventario
+// Controlador para crear un nuevo ingreso
 export const ctrlCreateInventory = async (req, res) => {
   try {
     const newIngreso = await IngresosModel.create(req.body);
+
+    // Registra la transacción en InventarioTransacciones
+    await InventarioTransaccionesModel.create({
+      id_materiales: req.body.id_materiales,
+      tipo_transaccion: "entrada",
+      cantidad: req.body.cantidad_ingreso,
+      fecha_transaccion: new Date(),
+    });
+
+    const materialId = req.body.id_materiales;
+    const cantidadIngreso = req.body.cantidad_ingreso;
+
+    // Actualiza la cantidad en el stock o crea un nuevo registro si no existe
+    await updateStock(materialId, cantidadIngreso);
+
     return res.status(201).json(newIngreso);
   } catch (error) {
     console.error(error);
     return res.status(500).json({
-      message: "Error Servidor",
+      message: "Error en el servidor",
+      error: error.message,
     });
   }
 };
+
+// Función para actualizar el stock en la tabla StockModel
+async function updateStock(materialId, cantidad) {
+  const stockRecord = await StocksModel.findOne({
+    where: { id_materiales: materialId },
+  });
+
+  if (stockRecord) {
+    stockRecord.cantidad_stock += cantidad;
+    await stockRecord.save();
+  } else {
+    // Si no existe un registro de stock para este material, créalo
+    await StocksModel.create({
+      id_materiales: materialId,
+      cantidad_stock: cantidad,
+    });
+  }
+}
 
 //controllador para actualizar todo el inventario
 export const ctrlUpdateInventory = async (req, res) => {
