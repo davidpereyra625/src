@@ -31,3 +31,36 @@ app.listen(port, () => {
   console.log(`servidor listo -> http://localhost:${port}/inventario`);
   startDb();
 });
+/*
+import express from "express";
+import { inventoryRouter } from "./routes/inventory.routes.js";
+import { startDb } from "./config/database.js";
+import cors from "cors";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+console.log(__dirname);
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+const port = 3000;
+
+// Configura una ruta para redirigir a index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.use("/", inventoryRouter);
+
+app.listen(port, () => {
+  console.log(`Servidor listo -> http://localhost:${port}`);
+  startDb();
+});
+*/
