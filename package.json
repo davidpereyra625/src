@@ -20,6 +20,9 @@
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0"
   },
+  "engines": {
+    "node": "16.14"
+  },
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.0.1"
