@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2023 a las 16:28:53
+-- Tiempo de generación: 24-10-2023 a las 14:14:44
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -42,8 +42,34 @@ CREATE TABLE `ingresos` (
 --
 
 INSERT INTO `ingresos` (`id`, `id_materiales`, `fecha_ingreso`, `movil`, `cantidad_ingreso`, `createdAt`, `updatedAt`) VALUES
-(3, 6, '2023-10-11 00:00:00', 'david4', 500, '2023-10-11 21:40:37', '2023-10-20 12:38:26'),
-(4, 1, '2023-10-12 00:00:00', 'prueba2', 221, '2023-10-12 13:56:31', '2023-10-12 13:57:03');
+(1, 2, '2023-10-29 00:00:00', 'nino', 50, '2023-10-22 05:18:01', '2023-10-23 16:50:26'),
+(2, 2, '2023-10-22 00:00:00', 'nino', 100, '2023-10-22 05:43:46', '2023-10-22 05:43:46');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventariotransacciones`
+--
+
+CREATE TABLE `inventariotransacciones` (
+  `id` int(11) NOT NULL,
+  `id_materiales` int(11) DEFAULT NULL,
+  `tipo_transaccion` enum('entrada','salida') DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `fecha_transaccion` datetime DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inventariotransacciones`
+--
+
+INSERT INTO `inventariotransacciones` (`id`, `id_materiales`, `tipo_transaccion`, `cantidad`, `fecha_transaccion`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 'entrada', 100, '2023-10-22 05:18:01', '2023-10-22 05:18:01', '2023-10-22 05:18:01'),
+(2, 1, 'salida', 10, '2023-10-22 05:55:27', '2023-10-22 05:18:23', '2023-10-22 05:55:27'),
+(3, 2, 'entrada', 100, '2023-10-22 05:43:46', '2023-10-22 05:43:46', '2023-10-22 05:43:46'),
+(4, 2, 'salida', 20, '2023-10-22 14:10:56', '2023-10-22 14:10:56', '2023-10-22 14:10:56');
 
 -- --------------------------------------------------------
 
@@ -64,14 +90,9 @@ CREATE TABLE `materiales` (
 --
 
 INSERT INTO `materiales` (`id`, `codigo_materiales`, `nombre_materiales`, `createdAt`, `updatedAt`) VALUES
-(1, '001', 'Cables', '2023-10-10 15:58:40', '2023-10-10 15:58:40'),
-(2, '002', 'Tornillos', '2023-10-10 15:58:40', '2023-10-10 15:58:40'),
-(3, '003', 'Antenas', '2023-10-11 13:37:46', '2023-10-11 13:37:46'),
-(4, '004', 'Pilas', '2023-10-11 21:35:53', '2023-10-11 21:35:53'),
-(5, '005', 'Cámaras ', '2023-10-11 21:41:15', '2023-10-11 21:41:15'),
-(6, '007', 'Pinzas', '2023-10-12 13:56:48', '2023-10-12 13:56:48'),
-(7, '008', 'Controles', '2023-10-19 14:42:12', '2023-10-19 14:42:12'),
-(8, '009', 'alambre', '2023-10-20 12:39:42', '2023-10-20 12:39:42');
+(1, '001', 'Cable', '2023-10-22 05:17:46', '2023-10-22 05:17:46'),
+(2, '002', 'antena', '2023-10-22 05:43:33', '2023-10-22 05:43:33'),
+(3, '005', 'ssss', '2023-10-24 00:25:42', '2023-10-24 00:25:42');
 
 -- --------------------------------------------------------
 
@@ -91,9 +112,10 @@ CREATE TABLE `provincias` (
 --
 
 INSERT INTO `provincias` (`id`, `descripcion_provincia`, `createdAt`, `updatedAt`) VALUES
-(1, 'Formosa', '2023-10-12 00:38:49', '2023-10-12 00:38:49'),
-(2, 'Chaco', '2023-10-12 00:38:49', '2023-10-12 00:38:49'),
-(3, 'Corrientes', '2023-10-12 00:38:49', '2023-10-12 00:38:49');
+(1, 'Formosa', '2023-10-22 07:17:04', '2023-10-22 07:17:04'),
+(2, 'Chaco', '2023-10-22 07:17:04', '2023-10-22 07:17:04'),
+(3, 'Corrientes', '2023-10-22 07:17:04', '2023-10-22 07:17:04'),
+(4, 'Santa Fé', '2023-10-22 07:17:04', '2023-10-22 07:17:04');
 
 -- --------------------------------------------------------
 
@@ -117,10 +139,29 @@ CREATE TABLE `salidas` (
 --
 
 INSERT INTO `salidas` (`id`, `id_materiales`, `id_provincias`, `movil`, `fecha_salida`, `cantidad_salida`, `createdAt`, `updatedAt`) VALUES
-(3, 6, 1, 'jose', '2023-10-27 00:00:00', 150, '2023-10-17 11:38:05', '2023-10-20 12:40:31'),
-(4, 1, 1, 'jose', '2023-10-22 00:00:00', 122, '2023-10-17 13:18:36', '2023-10-17 13:18:36'),
-(5, 6, 1, 'mucho', '2023-10-19 00:00:00', 1, '2023-10-19 11:53:03', '2023-10-19 11:54:20'),
-(6, 1, 3, 'el deivid', '2023-10-19 00:00:00', 12345, '2023-10-19 17:00:02', '2023-10-19 17:00:02');
+(2, 2, 2, 'jose', '2023-10-22 00:00:00', 20, '2023-10-22 14:10:56', '2023-10-22 14:10:56');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `stocks`
+--
+
+CREATE TABLE `stocks` (
+  `id` int(11) NOT NULL,
+  `id_materiales` int(11) DEFAULT NULL,
+  `cantidad_stock` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `id_materiales`, `cantidad_stock`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 90, '2023-10-22 05:18:01', '2023-10-22 05:55:27'),
+(2, 2, 80, '2023-10-22 05:43:47', '2023-10-22 14:10:56');
 
 --
 -- Índices para tablas volcadas
@@ -130,6 +171,13 @@ INSERT INTO `salidas` (`id`, `id_materiales`, `id_provincias`, `movil`, `fecha_s
 -- Indices de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_materiales` (`id_materiales`);
+
+--
+-- Indices de la tabla `inventariotransacciones`
+--
+ALTER TABLE `inventariotransacciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_materiales` (`id_materiales`);
 
@@ -154,6 +202,13 @@ ALTER TABLE `salidas`
   ADD KEY `id_provincias` (`id_provincias`);
 
 --
+-- Indices de la tabla `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_materiales` (`id_materiales`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -161,25 +216,37 @@ ALTER TABLE `salidas`
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `inventariotransacciones`
+--
+ALTER TABLE `inventariotransacciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materiales`
 --
 ALTER TABLE `materiales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `provincias`
 --
 ALTER TABLE `provincias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `stocks`
+--
+ALTER TABLE `stocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -192,11 +259,23 @@ ALTER TABLE `ingresos`
   ADD CONSTRAINT `ingresos_ibfk_1` FOREIGN KEY (`id_materiales`) REFERENCES `materiales` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `inventariotransacciones`
+--
+ALTER TABLE `inventariotransacciones`
+  ADD CONSTRAINT `inventariotransacciones_ibfk_1` FOREIGN KEY (`id_materiales`) REFERENCES `materiales` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `salidas`
 --
 ALTER TABLE `salidas`
   ADD CONSTRAINT `salidas_ibfk_1` FOREIGN KEY (`id_materiales`) REFERENCES `materiales` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `salidas_ibfk_2` FOREIGN KEY (`id_provincias`) REFERENCES `provincias` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `stocks`
+--
+ALTER TABLE `stocks`
+  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`id_materiales`) REFERENCES `materiales` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
