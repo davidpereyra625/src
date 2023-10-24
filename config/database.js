@@ -9,7 +9,7 @@ import {
 
 export const sequelize = new Sequelize(DATABASE_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
-  dialect: DB_DIALECT,
+  dialect: "mysql",
 });
 
 export const startDb = async () => {
