@@ -1,8 +1,15 @@
 import { Sequelize } from "sequelize";
+import {
+  DATABASE_NAME,
+  DB_DIALECT,
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+} from "./config.js";
 
-export const sequelize = new Sequelize("db_inventory", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
+export const sequelize = new Sequelize(DATABASE_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: DB_DIALECT,
 });
 
 export const startDb = async () => {
