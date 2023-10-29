@@ -6,18 +6,6 @@ body {
   font-size: 16px; /* Tamaño de fuente base */
 }
 
-/* Encabezado */
-header {
-  background-color: #ff6200;
-  text-align: center;
-  padding: 10px; /* Reducción del espaciado en dispositivos móviles */
-}
-
-/* Títulos principales */
-.header h1 {
-  color: #ffffff;
-}
-
 /* Estilos para los botones principales */
 .btn-primary,
 .btn-secondary,
@@ -31,7 +19,6 @@ header {
   width: auto; /* Ancho automático para los botones */
   margin-bottom: 10px; /* Agrega un margen inferior para separar botones */
 }
-
 
 /* Estilo de celdas en hover */
 tr:hover {
@@ -97,28 +84,19 @@ label {
 }
 
 /* Estilos para el encabezado */
-.header-content {
+header {
   background-color: #ff6200;
   text-align: center;
   padding: 10px; /* Reducción del espaciado en dispositivos móviles */
+  margin: 0; /* Elimina el margen superior */
 }
 
-/* Títulos principales dentro del encabezado */
-.header-content h1 {
-  color: #ffffff;
+/* Estilos para los botones principales en el encabezado */
+.navbar-nav .nav-item {
+  margin: 0; /* Elimina el margen superior */
 }
 
-/* Estilos personalizados para otras partes de tu sitio web */
-
-/* Por favor, agrega más estilos según sea necesario para personalizar tu diseño */
-
-/* Estilos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
 @media (max-width: 768px) {
-  /* Redefine el espaciado en el encabezado y el contenido de los botones */
-  header {
-    padding: 10px;
-  }
-
   /* Asegura que los botones se ajusten al ancho de la pantalla */
   .btn-primary,
   .btn-secondary,
@@ -126,6 +104,8 @@ label {
     width: 100%;
     margin-top: 10px; /* Añade margen superior para separar botones */
   }
-
-  
+  /* Asegura que los botones se ajusten al ancho de la pantalla */
+  .navbar-nav .nav-item {
+    margin: 0; /* Elimina el margen superior */
+  }
 }
